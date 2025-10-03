@@ -1,4 +1,4 @@
-#A Python Project (Beginner, Instructive)
+# A Python Project (Beginner, Instructive)
 
-#About
+# About
 I don't know yet, but I have one rule no copy-paste no LLMs.
