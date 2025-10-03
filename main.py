@@ -1,47 +1,42 @@
 #A calculator with all four basic operations
 
-def add(a: int, b: int ) -> int: #type hinting
-    return a+b
+def Calculate(num1, num2, operation):  #funtion to calculate
+    match operation: #match case
+        case 1:
+            return num1 + num2  #num1 num2 are stored in the stack
+        case 2:
+            return num1 - num2
+        case 3:
+            return num1 * num2
+        case 4:
+            return num1 / num2 #result is stored in the heap
 
-def subtract(a: int, b: int) -> int:
-    return a-b
+def AskOperation(): #function to ask operation
+    operation = 0  #initialize operation
+    while operation not in [1,2,3,4,5]: #while loop
+        print("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Exit")
+        try:                                                                                                
+            operation = int(input("Enter the number corresponding to the operation you want to perform: ")) #try until user provides valid input
+        except ValueError:
+            operation = int(input("Invalid input. Please enter a valid number:"))
+            continue    
+    return operation
 
-def multiply(a: int,b: int) -> int:
-    return a*b
-
-def divide(a: int, b: int) -> float:
-    return a/b
-
-print("Welcome to the most useful calculator in the world!\nWe accept integers only.\n\nFor each operation you have to enter the name of the operation in English.\n")
-operation = input("Enter operation (addition, subtraction, multiplication, division): ")
-
-quit = 1 #set quit to 1 to start
-while(quit == 1): #infinite loop
-    if (operation!= "addition" and operation!= "subtraction" and operation!= "multiplication" and operation!= "division"): #comparative if statement
-        print("Invalid operation, Abort mission.")
-        exit() #halt execution
-    num1 = int(input("Enter first number: "))
-    num2 = int(input("Enter second number: "))
-    if (operation == "division" and num2 == 0):
-        print("Can't solve this one, Abort mission.")
-        exit()
-
-    match operation: #match case syntax
-        case "addition":
-            print("The result is : ", add(num1, num2))
-        case "subtraction":
-            print(f"The result is: {subtract(num1,num2)}") # different syntax f string
-        case "multiplication":
-            print(f"The result is: {multiply(num1,num2)}")
-        case "division":
-            print("The result is: ", divide(num1,num2))
-    
-    quit = int(input("Keep going? (1 for yes, 0 for no): "))
-    while (quit not in [0,1]): #input validation
-            quit= int(input(("Invalid input, try again.")))
-    if quit == 0:
-        exit();
-
-
+print("Welcome to the most useful calculator in the world!\nFor each operation you have to enter number corresponding to it.\n")
+operation = AskOperation() #Ask operation returns an integer that needs to be stored stored in DATA, therefore the operation = AskOperation() statement
+while operation != 5:
+    try:
+        num1 = float(input("Enter the first number: ")) #float input
+        num2 = float(input("Enter the second number: ")) #float input
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
+        continue
+    if operation == 4 and num2 == 0: #division by zero check
+        print("Error: Division by zero is not allowed.")
+        continue
+    result = Calculate(num1, num2, operation)
+    print(f"The result is: {result}\n")
+    operation = 0 #reset operation
+    operation = AskOperation() #reupdate operation
 
 #wow, such a useful project
