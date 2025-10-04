@@ -1,42 +1,47 @@
 #A calculator with all four basic operations
 
-def Calculate(num1, num2, operation):  #funtion to calculate
-    match operation: #match case
-        case 1:
-            return num1 + num2  #num1 num2 are stored in the stack
-        case 2:
-            return num1 - num2
-        case 3:
-            return num1 * num2
-        case 4:
-            return num1 / num2 #result is stored in the heap
+def Calculator():
+    finished = False
+    result = 0
+    operator = ''
 
-def AskOperation(): #function to ask operation
-    operation = 0  #initialize operation
-    while operation not in [1,2,3,4,5]: #while loop
-        print("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Exit")
-        try:                                                                                                
-            operation = int(input("Enter the number corresponding to the operation you want to perform: ")) #try until user provides valid input
-        except ValueError:
-            operation = int(input("Invalid input. Please enter a valid number:"))
-            continue    
-    return operation
+    number_input = input("Enter a number or '=' to finish: ")
+    if number_input == '=':
+        print("No calculation performed.")
+        return 0
+    else:
+        number = float(number_input)
+        result = number
 
-print("Welcome to the most useful calculator in the world!\nFor each operation you have to enter number corresponding to it.\n")
-operation = AskOperation() #Ask operation returns an integer that needs to be stored stored in DATA, therefore the operation = AskOperation() statement
-while operation != 5:
-    try:
-        num1 = float(input("Enter the first number: ")) #float input
-        num2 = float(input("Enter the second number: ")) #float input
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
-        continue
-    if operation == 4 and num2 == 0: #division by zero check
-        print("Error: Division by zero is not allowed.")
-        continue
-    result = Calculate(num1, num2, operation)
-    print(f"The result is: {result}\n")
-    operation = 0 #reset operation
-    operation = AskOperation() #reupdate operation
+    while not finished:
+        operator = input("Enter an operator (+, -, *, /) or '=' to finish: ")
+
+        if operator == '=':
+            finished = True
+            print("Final result:", result)
+            return result
+
+        next_number = float(input("Enter another number: "))
+
+        if operator == '+':
+            result += next_number
+        elif operator == '-':
+            result -= next_number
+        elif operator == '*':
+            result *= next_number
+        elif operator == '/':
+            if next_number != 0:
+                result /= next_number
+            else:
+                print("Error: Division by zero.")
+        else:
+            print("Invalid operator. Please try again.")
+
+        print("Current result:", result)
+
+        
+
+print(Calculator())
+
 
 #wow, such a useful project
